@@ -13,7 +13,7 @@
             <el-table-column prop="telephone" label="联系方式"></el-table-column>
             <el-table-column label="操作">
             <template v-slot="slot">
-                <a href="" @click.prevent="toDeleteHandler(slot.row.id)"><i class="el-icon-delete"></i></a>git
+                <a href="" @click.prevent="toDeleteHandler(slot.row.id)"><i class="el-icon-delete"></i></a>
                 <a href="" @click.prevent="toUpdataHandler(slot.row)"><i class="el-icon-edit-outline"></i></a>
 
             </template>
