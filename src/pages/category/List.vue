@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-button type="success" size="small" @click="toAddHandler">添加</el-button>
-    <el-button type="danger" size="small">删除</el-button>
+    <el-button type="danger" size="small">批量删除</el-button>
     <el-table :data="category">
       <el-table-column prop="id" label="编号"></el-table-column>
       <el-table-column prop="name" label="栏目名称"></el-table-column>
