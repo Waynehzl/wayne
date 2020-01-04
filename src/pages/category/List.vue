@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>栏目管理</h1>
     <el-button type="success" size="small" @click="toAddHandler">添加</el-button>
     <el-button type="danger" size="small">删除</el-button>
     <el-table :data="category">
@@ -10,8 +9,8 @@
       <el-table-column prop="parentId" label="父栏目"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template v-slot="slot">
-          <a href @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
-          <a href @click.prevent="toUpdateHandler(slot.row)">修改</a>
+          <a href @click.prevent="toDeleteHandler(slot.row.id)"><i class="el-icon-delete"></i></a>
+          <a href @click.prevent="toUpdateHandler(slot.row)"><i class="el-icon-edit-outline"></i></a>
         </template>
       </el-table-column>
     </el-table>
