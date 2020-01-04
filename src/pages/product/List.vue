@@ -10,8 +10,7 @@
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="description" label="描述"></el-table-column>
       <el-table-column prop="price" label="价格"></el-table-column>
-      <el-table-column prop="categoryId" label="所属产品"></el-table-column>
-      
+      <el-table-column prop="categoryId" label="所属产品"></el-table-column> 
       <el-table-column label="操作">
         <template v-slot="slot">
           <a href="" @click.prevent="toDeleteHandler(slot.row.id)"><i class="el-icon-delete"></i></a>
@@ -31,9 +30,6 @@
       width="60%">
         ---{{form}}
       <el-form :model="form" label-width="80px">
-        <el-form-item label="编号">
-          <el-input v-model="form.id"></el-input>
-        </el-form-item>
         <el-form-item label="名称">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
@@ -44,7 +40,10 @@
           <el-input v-model="form.price"></el-input>
         </el-form-item>
         <el-form-item label="所属产品">
-          <el-input v-model="form.categoryId"></el-input>
+          <el-select v-model="form.categoryId" placeholder="请选择">
+          <el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id">
+          </el-option>
+        </el-select>
         </el-form-item>
       </el-form>
 
@@ -64,8 +63,15 @@ import querystring from 'querystring'
 export default {
   // 用于存放网页中需要调用的方法
   methods:{
+    loadCategory(){
+    let url = "http://localhost:6677/category/findAll"
+      request.get(url).then((response)=>{
+        // 将查询结果设置到customers中，this指向外部函数的this
+        this.options= response.data;
+      })
+    },
     loadData(){
-      let url = "http://134.175.154.93:6677/product/findAll"
+      let url = "http://localhost:6677/product/findAll"
       request.get(url).then((response)=>{
         // 将查询结果设置到customers中，this指向外部函数的this
         this.product = response.data;
@@ -77,7 +83,7 @@ export default {
       // request.post(url,this.form)
       // 查询字符串 type=customer&age=12
       // 通过request与后台进行交互，并且要携带参数
-      let url = "http://134.175.154.93:6677/product/saveOrUpdate";
+      let url = "http://localhost:6677/product/saveOrUpdate";
       request({
         url,
         method:"POST",
@@ -104,7 +110,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        let url ="http://134.175.154.93:6677/product/deleteById?id="+id;
+        let url ="http://localhost:6677/product/deleteById?id="+id;
         request.get(url).then((response)=>{
           //刷新数据
           this.loadData();    
@@ -124,9 +130,8 @@ export default {
       this.visible = false;
     },
     toAddHandler(){
-      this.form={
-                type:"product"
-            }
+      this.form={}
+
       this.visible = true;
     }
   },
@@ -136,15 +141,15 @@ export default {
     return {
       visible:false,
       product:[],
-      form:{
-        type:"product"
-      }
+      form:{},
+      options:{}
     }
   },
   created(){
     // this为当前vue实例对象
     // vue实例创建完毕 
     this.loadData();
+    this.loadCategory();
 
   }
 }
