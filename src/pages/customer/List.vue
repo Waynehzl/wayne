@@ -9,7 +9,7 @@
         <!--表格-->                    
         <el-table :data="customers">
             <el-table-column prop="id" label="编号"></el-table-column>
-            <el-table-column prop="realname" label="姓名"></el-table-column>
+            <el-table-column prop="username" label="姓名"></el-table-column>
             <el-table-column prop="telephone" label="联系方式"></el-table-column>
             <el-table-column label="操作">
             <template v-slot="slot">

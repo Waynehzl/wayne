@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '汽车美容服务公司',
+  title: '名车行',
 
   /**
    * @type {boolean} true | false
