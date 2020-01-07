@@ -45,7 +45,7 @@
     <!--模态框 -->
 
     <el-dialog :title="title" :visible.sync="visiable" width="60%">
-      ---{{form}}
+      
       <el-form :model="form" label-width="80px">
         <el-form-item label="姓名">
           <el-input v-model="form.username"></el-input>
@@ -75,8 +75,10 @@ export default {
       form: {},
       params:{
           page:0,
-          pageSize:10
+          pageSize:10,
+          customerId:26
       },
+      title:"",
       activeName: "first",
     
       activeName: "second",
@@ -91,7 +93,7 @@ export default {
     
       activeName: "sevevth",
     
-      activeName: "second",
+      activeName: "eigth",
     }
   },
   created() {
@@ -120,7 +122,7 @@ export default {
         data: querystring.stringify(this.params)
       }).then((response)=>{
           this.order=response.data;
-                })
+      })
     },
 
     submitHandler() {
@@ -167,7 +169,8 @@ export default {
     },
     toUpdataHandler(row) {
       this.form = row;
-      (this.title = "修改顾客信息"), (this.visiable = true);
+      this.title = "修改顾客信息", 
+      this.visiable = true;
     },
     closeModalHandler() {
       this.visiable = false;
@@ -178,7 +181,8 @@ export default {
       this.form = {
         type: "order"
       };
-      (this.title = "录入顾客信息"), (this.visiable = true);
+      this.title = "录入顾客信息", 
+      this.visiable = true;
     }
   }
 };

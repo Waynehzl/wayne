@@ -27,7 +27,7 @@
         <!--模态框 --> 
                            
 <el-dialog :title="title" :visible.sync="visiable" width="60%" >
-       ---{{form}}
+      
     <el-form :model="form" label-width="80px">
         <el-form-item label="用户名">
             <el-input v-model="form.username"></el-input>
@@ -64,6 +64,7 @@ export default {
      //用于存放要向网页中现实的数据                   
 data(){
     return{
+        title:{},
         visiable:false,
         customers:[],
         form:{}
